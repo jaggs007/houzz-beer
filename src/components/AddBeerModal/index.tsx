@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Image } from "react-bootstrap";
 import DefaultImage from "../../static/houzz-beer.png";
-import { BeerErrorT } from "../../types";
+import { BeerErrorT, CustomBeerT } from "../../types";
 import { useDispatch } from "react-redux";
 import { addCustomBeer } from "../../store/customBeersSlice";
 
@@ -10,13 +10,16 @@ interface AddBeerModalI {
   onCloseModal: () => void;
 }
 const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
-  const [beerName, setBeerName] = useState<string>("");
-  const [beerGenre, setBeerGenre] = useState<string>("");
-  const [beerDescription, setBeerDescription] = useState<string>("");
+  const [beer, setBeer] = useState<CustomBeerT>({
+    name: "",
+    genre: "",
+    description: "",
+  });
+
   const [errors, setErrors] = useState<BeerErrorT>({
-    beerName: "",
-    beerGenre: "",
-    beerDescription: "",
+    name: "",
+    genre: "",
+    description: "",
   });
 
   const dispatch = useDispatch();
@@ -25,19 +28,20 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
     event.preventDefault();
     let newErrors = { ...errors };
     let formIsValid = true;
+    const { name, genre, description } = beer;
 
-    if (!beerName) {
-      newErrors.beerName = "Beer name is required";
+    if (!name) {
+      newErrors.name = "Beer name is required";
       formIsValid = false;
     }
 
-    if (!beerGenre) {
-      newErrors.beerGenre = "Genre is required";
+    if (!genre) {
+      newErrors.genre = "Genre is required";
       formIsValid = false;
     }
 
-    if (!beerDescription) {
-      newErrors.beerDescription = "Description is required";
+    if (!description) {
+      newErrors.description = "Description is required";
       formIsValid = false;
     }
 
@@ -46,15 +50,16 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
     if (formIsValid) {
       dispatch(
         addCustomBeer({
-          name: beerName,
-          genre: beerGenre,
-          description: beerDescription,
+          name,
+          genre,
+          description,
         })
       );
-
-      setBeerGenre("");
-      setBeerDescription("");
-      setBeerName("");
+      setBeer({
+        name: "",
+        genre: "",
+        description: "",
+      });
       onCloseModal();
     }
   };
@@ -73,51 +78,52 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
               height: "120px",
             }}
             src={DefaultImage}
-          ></Image>
-          <Form.Group className="mb-3" controlId="beerName">
-            <Form.Label>Beer Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter beer name"
-              value={beerName}
-              onChange={(e) => setBeerName(e.target.value)}
-              required
-            />{" "}
-            {errors.beerName && (
-              <Form.Text className="text-danger">{errors.beerName}</Form.Text>
-            )}
-          </Form.Group>
+          />
 
-          <Form.Group className="mb-3" controlId="beerGenre">
-            <Form.Label>Beer Genre</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter beer genre"
-              value={beerGenre}
-              onChange={(e) => setBeerGenre(e.target.value)}
-              required
-            />
-            {errors.beerGenre && (
-              <Form.Text className="text-danger">{errors.beerGenre}</Form.Text>
-            )}
-          </Form.Group>
+          <BeerFormItem
+            label="Name"
+            value={beer.name}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setBeer((prevValue: CustomBeerT) => {
+                return {
+                  ...prevValue,
+                  name: e.target.value,
+                };
+              });
+            }}
+            fieldErrors={errors.name}
+            placeholder="Name"
+          />
 
-          <Form.Group className="mb-3" controlId="beerDescription">
-            <Form.Label>Beer Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Enter beer description"
-              value={beerDescription}
-              onChange={(e) => setBeerDescription(e.target.value)}
-              required
-            />{" "}
-            {errors.beerDescription && (
-              <Form.Text className="text-danger">
-                {errors.beerDescription}
-              </Form.Text>
-            )}
-          </Form.Group>
+          <BeerFormItem
+            label="Genre"
+            value={beer.genre}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setBeer((prevValue: CustomBeerT) => {
+                return {
+                  ...prevValue,
+                  genre: e.target.value,
+                };
+              });
+            }}
+            fieldErrors={errors.name}
+            placeholder="Genre"
+          />
+
+          <BeerFormItem
+            label="Description"
+            value={beer.description}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setBeer((prevValue: CustomBeerT) => {
+                return {
+                  ...prevValue,
+                  description: e.target.value,
+                };
+              });
+            }}
+            fieldErrors={errors.name}
+            placeholder="Description"
+          />
         </Form>
       </Modal.Body>
       <Modal.Footer>
@@ -133,3 +139,27 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
 };
 
 export default AddBeerModal;
+
+const BeerFormItem = ({
+  label,
+  placeholder,
+  onChange,
+  value,
+  fieldErrors,
+}: any) => {
+  return (
+    <Form.Group className="mb-3" controlId="genre">
+      <Form.Label>{label}</Form.Label>
+      <Form.Control
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        required
+      />
+      {fieldErrors && (
+        <Form.Text className="text-danger">{fieldErrors}</Form.Text>
+      )}
+    </Form.Group>
+  );
+};

@@ -5,9 +5,9 @@ export type BeerT = {
 };
 
 export type BeerErrorT = {
-  beerName: string;
-  beerDescription: string;
-  beerGenre: string;
+  name: string;
+  description: string;
+  genre: string;
 };
 
 export type CustomBeerT = {
