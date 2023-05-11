@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Nav, Row } from "react-bootstrap";
-import { BeerItemCard } from "../BeerItemCard";
+import { BeerItemCard } from "components/BeerItemCard";
 import Spinner from "react-bootstrap/Spinner";
-import { fetchBeers } from "../../store/beersSlice";
+import { fetchBeers } from "store/beersSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { DEFAULT_ITEMS_PER_PAGE } from "../../constants";
+import { DEFAULT_ITEMS_PER_PAGE } from "constant";
+import { BsChevronDown } from "react-icons/bs";
 
 const Beers = () => {
   const [activePage, setActivePage] = useState<number>(1);
@@ -78,9 +79,9 @@ const Beers = () => {
         <Nav.Link
           onClick={onLoadMore}
           eventKey="load-more"
-          className="link-primary"
+          className="link-primary fw-bold"
         >
-          Load More
+          Load More <BsChevronDown size={20} color="blue" />
         </Nav.Link>
       )}
     </Container>

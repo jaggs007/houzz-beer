@@ -7,11 +7,11 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import "./index.css";
-import { useModal } from "../../hooks";
+import { useModal } from "hooks";
 import BeerDetailModal from "../BeerDetailModal";
-import { BeerResponseT, CustomBeerT } from "../../types";
-import DefaultImage from "../../static/houzz-beer.png";
-import { getSubString } from "../../utils";
+import { BeerResponseT, CustomBeerT } from "types";
+import DefaultImage from "static/houzz-beer.png";
+import { getSubString } from "utils";
 
 interface BeerItemCardI {
   beer: BeerResponseT | CustomBeerT;
@@ -64,7 +64,7 @@ export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer }) => {
                 {name}
               </Col>
               <Col
-                className="hb-BeerItemCard-tagline fs-5 fw-bold mt-2"
+                className="hb-BeerItemCard-tagline fs-4 fw-bold mt-2"
                 {...responsiveProps}
               >
                 {tagline || genre}

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { BeerResponseT } from "../types";
-import { BEERS_API } from "../constants";
+import { BeerResponseT } from "types";
+import { BEERS_API } from "constant";
 
 export interface BeerState {
   data: BeerResponseT[];

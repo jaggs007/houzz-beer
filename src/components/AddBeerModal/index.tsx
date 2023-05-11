@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Image } from "react-bootstrap";
-import DefaultImage from "../../static/houzz-beer.png";
-import { BeerErrorT, CustomBeerT } from "../../types";
+import DefaultImage from "static/houzz-beer.png";
+import { BeerErrorT, CustomBeerT } from "types";
 import { useDispatch } from "react-redux";
-import { addCustomBeer } from "../../store/customBeersSlice";
+import { addCustomBeer } from "store/customBeersSlice";
 
 interface AddBeerModalI {
   isOpen: boolean;

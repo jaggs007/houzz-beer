@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import customBeersReducer from "./customBeersSlice";
-import beersReducer from "./beersSlice";
+import customBeersReducer from "store/customBeersSlice";
+import beersReducer from "store/beersSlice";
 
 const rootReducer = combineReducers({
   customBeers: customBeersReducer,

@@ -8,8 +8,8 @@ import {
   Col,
   Tooltip,
 } from "react-bootstrap";
-import { BeerResponseT, CustomBeerT } from "../../types";
-import DefaultImage from "../../static/houzz-beer.png";
+import { BeerResponseT, CustomBeerT } from "types";
+import DefaultImage from "static/houzz-beer.png";
 
 interface BeerDetailModalI {
   beer: BeerResponseT | CustomBeerT;

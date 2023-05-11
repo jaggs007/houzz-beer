@@ -1,7 +1,7 @@
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { useModal } from "../../hooks";
-import AddBeerModal from "../AddBeerModal";
+import { useModal } from "hooks";
+import AddBeerModal from "components/AddBeerModal";
 import "./index.css";
 
 const Header = (): JSX.Element => {
@@ -28,7 +28,11 @@ const Header = (): JSX.Element => {
           </Navbar.Collapse>
         </Container>
         {isCustomPage && (
-          <Button onClick={onOpenModal} style={{ minWidth: "150px" }}>
+          <Button
+            onClick={onOpenModal}
+            className="justify-content-center mx-auto"
+            style={{ minWidth: "150px" }}
+          >
             Add a new beer
           </Button>
         )}

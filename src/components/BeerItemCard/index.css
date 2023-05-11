@@ -1,3 +1,6 @@
+.hb-BeerItemCard {
+  min-height: 250px !important;
+}
 .hb-BeerItemCard:hover {
   background: #aad3f2;
 }

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CustomBeerT } from "../types";
+import { CustomBeerT } from "types";
 
 interface CustomBeersState {
   customBeers: CustomBeerT[];

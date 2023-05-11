@@ -1,9 +1,9 @@
 import { Col, Container, Row } from "react-bootstrap";
-import CustomBeerModal from "../AddBeerModal";
-import { useModal } from "../../hooks";
+import CustomBeerModal from "components/AddBeerModal";
+import { useModal } from "hooks";
 import { useSelector } from "react-redux";
-import { CustomBeerT } from "../../types";
-import { BeerItemCard } from "../BeerItemCard";
+import { CustomBeerT } from "types";
+import { BeerItemCard } from "components/BeerItemCard";
 
 const CustomBeers = () => {
   const { isOpen, onOpenModal, onCloseModal } = useModal();
@@ -41,14 +41,13 @@ const EmptyContainer = ({ onOpenModal }: any) => {
           <Row className="justify-content-center">
             <Col>
               <p className="text-center">
-                <a
+                <span
                   className="link-primary"
                   onClick={onOpenModal}
-                  href="#"
                   role="button"
                 >
                   Click here
-                </a>{" "}
+                </span>
                 to add your first beer
               </p>
             </Col>
