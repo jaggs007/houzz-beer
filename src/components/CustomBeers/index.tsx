@@ -38,14 +38,14 @@ interface EmptyContainerI {
 }
 const EmptyContainer: React.FC<EmptyContainerI> = ({ onOpenModal }) => {
   return (
-    <Container>
+    <Container className='pt-5'>
       <Row>
         <Col xs={12}>Nothing to see yet</Col>
         <Col xs={12}>
           <Row className='justify-content-center'>
             <Col>
               <p className='text-center'>
-                <span className='link-primary pe-2' onClick={onOpenModal} role='button'>
+                <span className='link-primary pe-2 fw-bold' onClick={onOpenModal} role='button'>
                   Click here
                 </span>
                 to add your first beer
