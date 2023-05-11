@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchBeers } from "../../apis";
 import { Container, Nav, Row } from "react-bootstrap";
-import { BeerItemCardCard } from "./BeerItemCard";
+import { BeerItemCard } from "../BeerItemCard";
 import Spinner from "react-bootstrap/Spinner";
 
 const itemsPerPage = 10;
@@ -50,7 +50,7 @@ const Beers = () => {
       <Row>
         {(beers || []).map((beer: any) => {
           const { id } = beer;
-          return <BeerItemCardCard beer={beer} key={id} />;
+          return <BeerItemCard beer={beer} key={id} />;
         })}
       </Row>
 

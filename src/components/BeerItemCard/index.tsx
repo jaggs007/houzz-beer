@@ -7,13 +7,22 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import "./index.css";
+import { useModal } from "../../hooks";
+import BeerDetailModal from "../BeerDetailModal";
+import { BeerResponseT, CustomBeerT } from "../../types";
+import DefaultImage from "../../static/houzz-beer.png";
 
-export const BeerItemCardCard = ({ beer }: any) => {
-  const { image_url, description, name, tagline } = beer;
+interface BeerItemCardI {
+  beer: BeerResponseT | CustomBeerT;
+}
+export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer }) => {
+  //@ts-ignore
+  const { image_url, description, name, tagline, genre } = beer;
+  const { isOpen, onCloseModal, onOpenModal } = useModal();
 
   const renderTooltip = (props: any) => (
     <Tooltip id="button-tooltip" {...props}>
-      {tagline}
+      {tagline || genre}
     </Tooltip>
   );
 
@@ -29,14 +38,26 @@ export const BeerItemCardCard = ({ beer }: any) => {
 
   return (
     <Col sm={12} md={12} xs={12} lg={6}>
-      <Card body className="hb-BeerItemCard mb-3" role="button">
+      <BeerDetailModal
+        isOpen={isOpen}
+        onCloseModal={onCloseModal}
+        beer={beer}
+        onClick={onOpenModal}
+      />
+
+      <Card
+        body
+        className="hb-BeerItemCard mb-3"
+        role="button"
+        onClick={onOpenModal}
+      >
         <Row>
           <Col xs={12} md={2} sm={12} lg={4}>
             <OverlayTrigger placement="top" overlay={renderTooltip}>
               <Image
                 className="hb-BeerItemCard-image border border-0"
                 thumbnail
-                src={image_url}
+                src={image_url || DefaultImage}
               />
             </OverlayTrigger>
           </Col>
@@ -49,7 +70,7 @@ export const BeerItemCardCard = ({ beer }: any) => {
                 className="hb-BeerItemCard-tagline fs-5 fw-bold mt-2"
                 {...responsiveProps}
               >
-                {tagline}
+                {tagline || genre}
               </Col>
               <Col className="mt-2 fs-6" {...responsiveProps}>
                 {getSubString(description, 100)}
