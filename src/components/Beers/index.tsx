@@ -3,10 +3,11 @@ import { Col, Container, Nav, Row } from "react-bootstrap";
 import { BeerItemCard } from "components/BeerItemCard";
 import Spinner from "react-bootstrap/Spinner";
 import { fetchBeers } from "store/beersSlice";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { DEFAULT_ITEMS_PER_PAGE } from "constant";
 import { BsChevronDown } from "react-icons/bs";
+import { BeerResponseT } from "types";
+import { RootState } from "store";
 
 const Beers = () => {
   const [activePage, setActivePage] = useState<number>(1);
@@ -20,9 +21,9 @@ const Beers = () => {
       );
   }, [dispatch, activePage]);
 
-  const beersFetched = useSelector((state: any) => state.beers.data);
-  const loading = useSelector((state: any) => state.beers.loading);
-  const error = useSelector((state: any) => state.beers.error);
+  const beersFetched = useSelector((state: RootState) => state.beers.data);
+  const loading = useSelector((state: RootState) => state.beers.loading);
+  const error = useSelector((state: RootState) => state.beers.error);
 
   const onLoadMore = () => {
     const newActivePage = activePage + 1;
@@ -54,7 +55,7 @@ const Beers = () => {
   return (
     <Container className='mb-5'>
       <Row>
-        {beersFetched?.map((beer: any) => {
+        {beersFetched?.map((beer: BeerResponseT) => {
           const { id } = beer;
           return <BeerItemCard beer={beer} key={id} />;
         })}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button, Image, Row, OverlayTrigger, Col, Tooltip } from "react-bootstrap";
-import { BeerResponseT, CustomBeerT } from "types";
+import { BeerResponseT, CustomBeerT, RenderTooltipProps } from "types";
 import DefaultImage from "static/houzz-beer.png";
 
 interface BeerDetailModalI {
@@ -9,11 +9,12 @@ interface BeerDetailModalI {
   onCloseModal: () => void;
   onClick: () => void;
 }
+
 const BeerDetailModal: React.FC<BeerDetailModalI> = ({ beer, isOpen, onCloseModal }) => {
   // @ts-ignore
-  const { name, description, image_url, tagline, genre } = beer;
+  const { name, description, image_url: imageUrl, tagline, genre } = beer;
 
-  const renderTooltip = (props: any) => (
+  const renderTooltip = (props: RenderTooltipProps) => (
     <Tooltip id='button-tooltip' {...props}>
       {tagline || genre}
     </Tooltip>
@@ -31,7 +32,7 @@ const BeerDetailModal: React.FC<BeerDetailModalI> = ({ beer, isOpen, onCloseModa
               <Image
                 className='hb-BeerItemCard-image border border-0'
                 thumbnail
-                src={image_url || DefaultImage}
+                src={imageUrl || DefaultImage}
               />
             </OverlayTrigger>
           </Col>

@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CustomBeerT } from "types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CustomBeerT } from 'types';
 
 interface CustomBeersState {
   customBeers: CustomBeerT[];
@@ -10,7 +10,7 @@ const initialState: CustomBeersState = {
 };
 
 export const customBeersSlice = createSlice({
-  name: "customBeers",
+  name: 'customBeers',
   initialState,
   reducers: {
     addCustomBeer: (state, action: PayloadAction<CustomBeerT>) => {
@@ -19,7 +19,7 @@ export const customBeersSlice = createSlice({
         (customBeer: CustomBeerT) => customBeer.name,
       );
       if (uniqueBeerNames.includes(customBeer.name)) {
-        alert("Beer name should be unique");
+        alert('Beer name should be unique');
       } else {
         state.customBeers.push(customBeer);
       }

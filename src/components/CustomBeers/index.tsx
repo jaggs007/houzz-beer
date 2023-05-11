@@ -4,11 +4,12 @@ import { useModal } from "hooks";
 import { useSelector } from "react-redux";
 import { CustomBeerT } from "types";
 import { BeerItemCard } from "components/BeerItemCard";
+import { RootState } from "store";
 
 const CustomBeers = () => {
   const { isOpen, onOpenModal, onCloseModal } = useModal();
 
-  const customBeers = useSelector((state: any) => {
+  const customBeers = useSelector((state: RootState) => {
     return state.customBeers.customBeers;
   });
 
@@ -32,7 +33,10 @@ const CustomBeers = () => {
 
 export default CustomBeers;
 
-const EmptyContainer = ({ onOpenModal }: any) => {
+interface EmptyContainerI {
+  onOpenModal: () => void;
+}
+const EmptyContainer: React.FC<EmptyContainerI> = ({ onOpenModal }) => {
   return (
     <Container>
       <Row>

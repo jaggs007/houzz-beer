@@ -1,3 +1,5 @@
+import { TooltipProps } from "react-bootstrap";
+
 export type BeerT = {
   name: string;
   genre: string;
@@ -52,3 +54,8 @@ export type BeerResponseT = {
   target_og: number;
   ingredients: Ingredients;
 };
+
+export interface RenderTooltipProps extends TooltipProps {
+  tagline?: string;
+  genre?: string;
+}

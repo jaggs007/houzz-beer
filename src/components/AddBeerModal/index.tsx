@@ -53,7 +53,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
           name,
           genre,
           description,
-        })
+        }),
       );
       setBeer({
         name: '',
@@ -72,7 +72,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Image
-            className="border border-1 mb-3 p-1"
+            className='border border-1 mb-3 p-1'
             style={{
               width: '90px',
               height: '120px',
@@ -81,7 +81,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
           />
 
           <BeerFormItem
-            label="Name"
+            label='Name'
             value={beer.name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setBeer((prevValue: CustomBeerT) => {
@@ -92,11 +92,11 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
               });
             }}
             fieldErrors={errors.name}
-            placeholder="Name"
+            placeholder='Name'
           />
 
           <BeerFormItem
-            label="Genre"
+            label='Genre'
             value={beer.genre}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setBeer((prevValue: CustomBeerT) => {
@@ -107,11 +107,11 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
               });
             }}
             fieldErrors={errors.name}
-            placeholder="Genre"
+            placeholder='Genre'
           />
 
           <BeerFormItem
-            label="Description"
+            label='Description'
             value={beer.description}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setBeer((prevValue: CustomBeerT) => {
@@ -122,15 +122,15 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
               });
             }}
             fieldErrors={errors.name}
-            placeholder="Description"
+            placeholder='Description'
           />
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onCloseModal}>
+        <Button variant='secondary' onClick={onCloseModal}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button variant='primary' onClick={handleSubmit}>
           Add Beer
         </Button>
       </Modal.Footer>
@@ -155,18 +155,16 @@ const BeerFormItem: React.FC<BeerFormItemI> = ({
   fieldErrors,
 }) => {
   return (
-    <Form.Group className="mb-3" controlId="genre">
+    <Form.Group className='mb-3' controlId='genre'>
       <Form.Label>{label}</Form.Label>
       <Form.Control
-        type="text"
+        type='text'
         placeholder={placeholder}
         value={value}
         onChange={onChange}
         required
       />
-      {fieldErrors && (
-        <Form.Text className="text-danger">{fieldErrors}</Form.Text>
-      )}
+      {fieldErrors && <Form.Text className='text-danger'>{fieldErrors}</Form.Text>}
     </Form.Group>
   );
 };

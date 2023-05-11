@@ -11,17 +11,17 @@ const Header = (): JSX.Element => {
   const isCustomPage = location.pathname.includes('custom-beers');
   return (
     <>
-      <Navbar variant="light" className="hb-Navbar mb-3" expand="lg">
+      <Navbar variant='light' className='hb-Navbar mb-3' expand='lg'>
         <Container>
           <AddBeerModal isOpen={isOpen} onCloseModal={onCloseModal} />
-          <Navbar.Brand href="/">Houzz Beers</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto mb-2 mb-lg-0">
-              <NavLink to="/all-beers" className="nav-link">
+          <Navbar.Brand href='/'>Houzz Beers</Navbar.Brand>
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='me-auto mb-2 mb-lg-0'>
+              <NavLink to='/all-beers' className='nav-link'>
                 All Beers
               </NavLink>
-              <NavLink to="/custom-beers" className="nav-link">
+              <NavLink to='/custom-beers' className='nav-link'>
                 My Beers
               </NavLink>
             </Nav>
@@ -30,7 +30,7 @@ const Header = (): JSX.Element => {
         {isCustomPage && (
           <Button
             onClick={onOpenModal}
-            className="justify-content-center mx-auto"
+            className='justify-content-center mx-auto'
             style={{ minWidth: '150px' }}
           >
             Add a new beer
