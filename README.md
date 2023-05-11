@@ -26,6 +26,7 @@ Displays list of beers.
 - Redux Toolkit
 - TypeScript
 - Bootstrap
+- Eslint, Prettier
 - [Punk API](https://api.punkapi.com/v2/beers)
 
 ## Contributing
