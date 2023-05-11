@@ -16,7 +16,7 @@ export const customBeersSlice = createSlice({
     addCustomBeer: (state, action: PayloadAction<CustomBeerT>) => {
       const customBeer = action.payload;
       const uniqueBeerNames = (state.customBeers || []).map(
-        (customBeer: CustomBeerT) => customBeer.name
+        (customBeer: CustomBeerT) => customBeer.name,
       );
       if (uniqueBeerNames.includes(customBeer.name)) {
         alert("Beer name should be unique");

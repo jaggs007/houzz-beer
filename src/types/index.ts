@@ -16,8 +16,6 @@ export type CustomBeerT = {
   description: string;
 };
 
-export type CustomBeersT = any;
-
 type IngredientAmount = {
   value: number;
   unit: string;

@@ -13,7 +13,7 @@ const CustomBeers = () => {
   });
 
   return (
-    <Container className="d-flex flex-column">
+    <Container className='d-flex flex-column'>
       <CustomBeerModal isOpen={isOpen} onCloseModal={onCloseModal} />
       {!customBeers || customBeers.length === 0 ? (
         <EmptyContainer onOpenModal={onOpenModal} />
@@ -38,14 +38,10 @@ const EmptyContainer = ({ onOpenModal }: any) => {
       <Row>
         <Col xs={12}>Nothing to see yet</Col>
         <Col xs={12}>
-          <Row className="justify-content-center">
+          <Row className='justify-content-center'>
             <Col>
-              <p className="text-center">
-                <span
-                  className="link-primary"
-                  onClick={onOpenModal}
-                  role="button"
-                >
+              <p className='text-center'>
+                <span className='link-primary' onClick={onOpenModal} role='button'>
                   Click here
                 </span>
                 to add your first beer

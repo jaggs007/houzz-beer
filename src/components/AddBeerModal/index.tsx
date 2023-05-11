@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Modal, Button, Form, Image } from "react-bootstrap";
-import DefaultImage from "static/houzz-beer.png";
-import { BeerErrorT, CustomBeerT } from "types";
-import { useDispatch } from "react-redux";
-import { addCustomBeer } from "store/customBeersSlice";
+import React, { useState } from 'react';
+import { Modal, Button, Form, Image } from 'react-bootstrap';
+import DefaultImage from 'static/houzz-beer.png';
+import { BeerErrorT, CustomBeerT } from 'types';
+import { useDispatch } from 'react-redux';
+import { addCustomBeer } from 'store/customBeersSlice';
 
 interface AddBeerModalI {
   isOpen: boolean;
@@ -11,37 +11,37 @@ interface AddBeerModalI {
 }
 const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
   const [beer, setBeer] = useState<CustomBeerT>({
-    name: "",
-    genre: "",
-    description: "",
+    name: '',
+    genre: '',
+    description: '',
   });
 
   const [errors, setErrors] = useState<BeerErrorT>({
-    name: "",
-    genre: "",
-    description: "",
+    name: '',
+    genre: '',
+    description: '',
   });
 
   const dispatch = useDispatch();
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    let newErrors = { ...errors };
+    const newErrors = { ...errors };
     let formIsValid = true;
     const { name, genre, description } = beer;
 
     if (!name) {
-      newErrors.name = "Beer name is required";
+      newErrors.name = 'Beer name is required';
       formIsValid = false;
     }
 
     if (!genre) {
-      newErrors.genre = "Genre is required";
+      newErrors.genre = 'Genre is required';
       formIsValid = false;
     }
 
     if (!description) {
-      newErrors.description = "Description is required";
+      newErrors.description = 'Description is required';
       formIsValid = false;
     }
 
@@ -56,9 +56,9 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
         })
       );
       setBeer({
-        name: "",
-        genre: "",
-        description: "",
+        name: '',
+        genre: '',
+        description: '',
       });
       onCloseModal();
     }
@@ -74,8 +74,8 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
           <Image
             className="border border-1 mb-3 p-1"
             style={{
-              width: "90px",
-              height: "120px",
+              width: '90px',
+              height: '120px',
             }}
             src={DefaultImage}
           />
@@ -140,13 +140,20 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
 
 export default AddBeerModal;
 
-const BeerFormItem = ({
+interface BeerFormItemI {
+  label: string;
+  placeholder: string;
+  value: string;
+  fieldErrors: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+const BeerFormItem: React.FC<BeerFormItemI> = ({
   label,
   placeholder,
   onChange,
   value,
   fieldErrors,
-}: any) => {
+}) => {
   return (
     <Form.Group className="mb-3" controlId="genre">
       <Form.Label>{label}</Form.Label>

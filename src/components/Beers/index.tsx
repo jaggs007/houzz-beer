@@ -15,8 +15,8 @@ const Beers = () => {
   useEffect(() => {
     if (activePage)
       dispatch(
-        //@ts-ignore
-        fetchBeers({ page: activePage, itemsPerPage: DEFAULT_ITEMS_PER_PAGE })
+        // @ts-ignore
+        fetchBeers({ page: activePage, itemsPerPage: DEFAULT_ITEMS_PER_PAGE }),
       );
   }, [dispatch, activePage]);
 
@@ -35,7 +35,7 @@ const Beers = () => {
         <Row>
           <Col xs={12}>Nothing to see yet</Col>
           <Col xs={12}>
-            <Row className="justify-content-center">
+            <Row className='justify-content-center'>
               <Col>No data to dislay</Col>
             </Row>
           </Col>
@@ -45,22 +45,14 @@ const Beers = () => {
 
   if (beersFetched?.length === 0 && loading)
     return (
-      <div
-        className="d-flex align-items-center"
-        style={{ flexDirection: "column" }}
-      >
-        <Spinner
-          as="span"
-          animation="border"
-          role="status"
-          aria-hidden="true"
-        />
-        <span className="ml-2">Loading...</span>
+      <div className='d-flex align-items-center' style={{ flexDirection: "column" }}>
+        <Spinner as='span' animation='border' role='status' aria-hidden='true' />
+        <span className='ml-2'>Loading...</span>
       </div>
     );
 
   return (
-    <Container className="mb-5">
+    <Container className='mb-5'>
       <Row>
         {beersFetched?.map((beer: any) => {
           const { id } = beer;
@@ -69,19 +61,10 @@ const Beers = () => {
       </Row>
 
       {beersFetched.length > 0 && loading ? (
-        <Spinner
-          animation="border"
-          role="status"
-          as="span"
-          aria-hidden="true"
-        ></Spinner>
+        <Spinner animation='border' role='status' as='span' aria-hidden='true'></Spinner>
       ) : (
-        <Nav.Link
-          onClick={onLoadMore}
-          eventKey="load-more"
-          className="link-primary fw-bold"
-        >
-          Load More <BsChevronDown size={20} color="blue" />
+        <Nav.Link onClick={onLoadMore} eventKey='load-more' className='link-primary fw-bold'>
+          Load More <BsChevronDown size={20} color='blue' />
         </Nav.Link>
       )}
     </Container>

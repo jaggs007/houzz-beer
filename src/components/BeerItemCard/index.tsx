@@ -5,19 +5,19 @@ import {
   OverlayTrigger,
   Row,
   Tooltip,
-} from "react-bootstrap";
-import "./index.css";
-import { useModal } from "hooks";
-import BeerDetailModal from "../BeerDetailModal";
-import { BeerResponseT, CustomBeerT } from "types";
-import DefaultImage from "static/houzz-beer.png";
-import { getSubString } from "utils";
+} from 'react-bootstrap';
+import './index.css';
+import { useModal } from 'hooks';
+import BeerDetailModal from '../BeerDetailModal';
+import { BeerResponseT, CustomBeerT } from 'types';
+import DefaultImage from 'static/houzz-beer.png';
+import { getSubString } from 'utils';
 
 interface BeerItemCardI {
   beer: BeerResponseT | CustomBeerT;
 }
 export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer }) => {
-  //@ts-ignore
+  // @ts-ignore
   const { image_url, description, name, tagline, genre } = beer;
   const { isOpen, onCloseModal, onOpenModal } = useModal();
 
