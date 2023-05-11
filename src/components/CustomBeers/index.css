@@ -1,0 +1,29 @@
+.hb-CustomBeerItem-image {
+  border: none;
+  max-width: 100px;
+  max-height: 200px;
+}
+
+.hb-CustomBeerItem-title {
+  font-size: 24;
+  font-weight: bold;
+  text-align: initial;
+}
+
+.hb-CustomBeerItem-genre {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: initial;
+  color: #ff8c00;
+  margin-top: 4px;
+}
+
+.hb-CustomBeerItem-description {
+  font-size: 12px;
+  text-align: initial;
+  margin-top: 8px;
+}
+
+.hb-EmptyContainer-link {
+  cursor: pointer;
+}
