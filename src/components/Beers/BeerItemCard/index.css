@@ -1,0 +1,11 @@
+.hb-BeerItemCard:hover {
+  background: #aad3f2;
+}
+
+.hb-BeerItemCard-image {
+  max-height: 200px;
+}
+
+.hb-BeerItemCard-tagline {
+  color: #ff8c00;
+}
