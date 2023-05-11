@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { BeerResponseT, CustomBeerT } from "../../types";
+import DefaultImage from "../../static/houzz-beer.png";
 
 interface BeerDetailModalI {
   beer: BeerResponseT | CustomBeerT;
@@ -26,7 +27,7 @@ const BeerDetailModal: React.FC<BeerDetailModalI> = ({
 
   const renderTooltip = (props: any) => (
     <Tooltip id="button-tooltip" {...props}>
-      {tagline}
+      {tagline || genre}
     </Tooltip>
   );
 
@@ -42,7 +43,7 @@ const BeerDetailModal: React.FC<BeerDetailModalI> = ({
               <Image
                 className="hb-BeerItemCard-image border border-0"
                 thumbnail
-                src={image_url}
+                src={image_url || DefaultImage}
               />
             </OverlayTrigger>
           </Col>

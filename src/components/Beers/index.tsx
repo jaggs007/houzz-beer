@@ -1,35 +1,48 @@
 import { useEffect, useState } from "react";
-import { fetchBeers } from "../../apis";
-import { Container, Nav, Row } from "react-bootstrap";
+import { Col, Container, Nav, Row } from "react-bootstrap";
 import { BeerItemCard } from "../BeerItemCard";
 import Spinner from "react-bootstrap/Spinner";
-
-const itemsPerPage = 10;
+import { fetchBeers } from "../../store/beersSlice";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { DEFAULT_ITEMS_PER_PAGE } from "../../constants";
 
 const Beers = () => {
-  const [beers, setBeers] = useState<any>([]);
   const [activePage, setActivePage] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const getBeers = async () => {
-    setLoading(true);
-    const allBeers = await fetchBeers(activePage, itemsPerPage);
-    setTimeout(() => {
-      setLoading(false);
-      setBeers([...beers, ...allBeers]);
-    }, 1000); // to mimic the delay for loader display
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getBeers();
-  }, [activePage]);
+    if (activePage)
+      dispatch(
+        //@ts-ignore
+        fetchBeers({ page: activePage, itemsPerPage: DEFAULT_ITEMS_PER_PAGE })
+      );
+  }, [dispatch, activePage]);
+
+  const beersFetched = useSelector((state: any) => state.beers.data);
+  const loading = useSelector((state: any) => state.beers.loading);
+  const error = useSelector((state: any) => state.beers.error);
 
   const onLoadMore = () => {
     const newActivePage = activePage + 1;
     setActivePage(newActivePage);
   };
 
-  if ((!beers || beers.length === 0) && loading)
+  if (error)
+    return (
+      <Container>
+        <Row>
+          <Col xs={12}>Nothing to see yet</Col>
+          <Col xs={12}>
+            <Row className="justify-content-center">
+              <Col>No data to dislay</Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
+    );
+
+  if (beersFetched?.length === 0 && loading)
     return (
       <div
         className="d-flex align-items-center"
@@ -48,13 +61,13 @@ const Beers = () => {
   return (
     <Container className="mb-5">
       <Row>
-        {(beers || []).map((beer: any) => {
+        {beersFetched?.map((beer: any) => {
           const { id } = beer;
           return <BeerItemCard beer={beer} key={id} />;
         })}
       </Row>
 
-      {beers.length > 0 && loading ? (
+      {beersFetched.length > 0 && loading ? (
         <Spinner
           animation="border"
           role="status"
