@@ -45,7 +45,7 @@ const EmptyContainer: React.FC<EmptyContainerI> = ({ onOpenModal }) => {
           <Row className='justify-content-center'>
             <Col>
               <p className='text-center'>
-                <span className='link-primary' onClick={onOpenModal} role='button'>
+                <span className='link-primary pe-2' onClick={onOpenModal} role='button'>
                   Click here
                 </span>
                 to add your first beer

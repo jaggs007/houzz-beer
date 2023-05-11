@@ -1,20 +1,22 @@
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { useModal } from 'hooks';
-import AddBeerModal from 'components/AddBeerModal';
-import './index.css';
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { useModal } from "hooks";
+import AddBeerModal from "components/AddBeerModal";
+import "./index.scss";
 
 const Header = (): JSX.Element => {
   const location = useLocation();
   const { isOpen, onCloseModal, onOpenModal } = useModal();
 
-  const isCustomPage = location.pathname.includes('custom-beers');
+  const isCustomPage = location.pathname.includes("custom-beers");
   return (
     <>
       <Navbar variant='light' className='hb-Navbar mb-3' expand='lg'>
         <Container>
           <AddBeerModal isOpen={isOpen} onCloseModal={onCloseModal} />
-          <Navbar.Brand href='/'>Houzz Beers</Navbar.Brand>
+          <Navbar.Brand as='div' className='fw-bold text-info'>
+            Houzz Beers
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto mb-2 mb-lg-0'>
@@ -31,7 +33,7 @@ const Header = (): JSX.Element => {
           <Button
             onClick={onOpenModal}
             className='justify-content-center mx-auto'
-            style={{ minWidth: '150px' }}
+            style={{ minWidth: "150px" }}
           >
             Add a new beer
           </Button>

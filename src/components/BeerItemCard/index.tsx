@@ -1,5 +1,5 @@
 import { Card, Col, Image, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
-import "./index.css";
+import "./index.scss";
 import { useModal } from "hooks";
 import BeerDetailModal from "../BeerDetailModal";
 import { BeerResponseT, CustomBeerT, RenderTooltipProps } from "types";
