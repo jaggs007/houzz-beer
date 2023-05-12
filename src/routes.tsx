@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import Beers from "./components/Beers";
-import CustomBeers from "./components/CustomBeers";
-import Header from "./components/Header";
+import Beers from "components/Beers";
+import CustomBeers from "components/CustomBeers";
+import Header from "components/Header";
 
 const router = createBrowserRouter([
   {

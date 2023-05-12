@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Nav, Row } from "react-bootstrap";
+import { Container, Nav, Row } from "react-bootstrap";
 import { BeerItemCard } from "components/BeerItemCard";
 import Spinner from "react-bootstrap/Spinner";
 import { fetchBeers } from "store/beersSlice";
@@ -8,6 +8,7 @@ import { DEFAULT_ITEMS_PER_PAGE } from "constant";
 import { BsChevronDown } from "react-icons/bs";
 import { BeerResponseT } from "types";
 import { RootState } from "store";
+import EmptyContainer from "common/EmptyContainer";
 
 const Beers = () => {
   const [activePage, setActivePage] = useState<number>(1);
@@ -32,16 +33,9 @@ const Beers = () => {
 
   if (error)
     return (
-      <Container>
-        <Row>
-          <Col xs={12}>Nothing to see yet</Col>
-          <Col xs={12}>
-            <Row className='justify-content-center'>
-              <Col>No data to dislay</Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
+      <EmptyContainer header='Oops!'>
+        <p>{error}</p>
+      </EmptyContainer>
     );
 
   if (beersFetched?.length === 0 && loading)

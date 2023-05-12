@@ -1,20 +1,14 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-interface BeerFormItemI {
+interface FormItemI {
   label: string;
   placeholder: string;
   value: string;
   fieldErrors: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const BeerFormItem: React.FC<BeerFormItemI> = ({
-  label,
-  placeholder,
-  onChange,
-  value,
-  fieldErrors,
-}) => {
+const FormItem: React.FC<FormItemI> = ({ label, placeholder, onChange, value, fieldErrors }) => {
   return (
     <Form.Group className='mb-3' controlId='genre'>
       <Form.Label>{label}</Form.Label>
@@ -29,4 +23,4 @@ const BeerFormItem: React.FC<BeerFormItemI> = ({
     </Form.Group>
   );
 };
-export default BeerFormItem;
+export default FormItem;

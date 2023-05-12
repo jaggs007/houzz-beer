@@ -4,7 +4,7 @@ import DefaultImage from "static/houzz-beer.png";
 import { BaseBeerT } from "types";
 import { useDispatch } from "react-redux";
 import { addCustomBeer } from "store/customBeersSlice";
-import BeerFormItem from "components/AddBeerModal/BeerFormItem";
+import FormItem from "common/FormItem";
 
 interface AddBeerModalI {
   isOpen: boolean;
@@ -26,44 +26,54 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    const newErrors = { ...errors };
-    let formIsValid = true;
+  const validateErrors = () => {
     const { name, genre, description } = beer;
 
-    if (!name) {
-      newErrors.name = "Beer name is required";
-      formIsValid = false;
-    }
-
-    if (!genre) {
-      newErrors.genre = "Genre is required";
-      formIsValid = false;
-    }
-
-    if (!description) {
-      newErrors.description = "Description is required";
-      formIsValid = false;
-    }
+    const newErrors = {
+      name: name ? "" : "Beer name is required",
+      genre: genre ? "" : "Genre is required",
+      description: description ? "" : "Description is required",
+    };
 
     setErrors(newErrors);
+    return !Object.values(newErrors).some(Boolean);
+  };
+
+  const handleSubmit = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    const formIsValid = validateErrors();
 
     if (formIsValid) {
-      dispatch(
-        addCustomBeer({
-          name,
-          genre,
-          description,
-        }),
-      );
-      setBeer({
-        name: "",
-        genre: "",
-        description: "",
-      });
+      addCustomBeerToStore();
+      resetForm();
       onCloseModal();
     }
+  };
+  const addCustomBeerToStore = () => {
+    const { name, genre, description } = beer;
+    dispatch(addCustomBeer({ name, genre, description }));
+  };
+
+  const resetForm = () => {
+    setBeer({
+      name: "",
+      genre: "",
+      description: "",
+    });
+  };
+
+  const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+    const value = e.target.value;
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: "",
+    }));
+
+    setBeer((prevBeer) => ({
+      ...prevBeer,
+      [field]: value,
+    }));
   };
 
   return (
@@ -82,47 +92,26 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
             src={DefaultImage}
           />
 
-          <BeerFormItem
+          <FormItem
             label='Name'
             value={beer.name}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setBeer((prevValue: BaseBeerT) => {
-                return {
-                  ...prevValue,
-                  name: e.target.value,
-                };
-              });
-            }}
+            onChange={(e) => handleFieldChange(e, "name")}
             fieldErrors={errors.name}
             placeholder='Name'
           />
 
-          <BeerFormItem
+          <FormItem
             label='Genre'
             value={beer?.genre}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setBeer((prevValue: BaseBeerT) => {
-                return {
-                  ...prevValue,
-                  genre: e.target.value,
-                };
-              });
-            }}
+            onChange={(e) => handleFieldChange(e, "genre")}
             fieldErrors={errors.name}
             placeholder='Genre'
           />
 
-          <BeerFormItem
+          <FormItem
             label='Description'
             value={beer.description}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setBeer((prevValue: BaseBeerT) => {
-                return {
-                  ...prevValue,
-                  description: e.target.value,
-                };
-              });
-            }}
+            onChange={(e) => handleFieldChange(e, "description")}
             fieldErrors={errors.name}
             placeholder='Description'
           />
