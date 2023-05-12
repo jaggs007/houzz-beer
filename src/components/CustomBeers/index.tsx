@@ -1,18 +1,24 @@
 import { Container, Row } from "react-bootstrap";
 import CustomBeerModal from "components/AddBeerModal";
 import { useModal } from "hooks";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BaseBeerT } from "types";
 import { BeerItemCard } from "components/BeerItemCard";
 import { RootState } from "store";
 import EmptyContainer from "common/EmptyContainer";
+import { removeCustomBeer } from "store/customBeersSlice";
 
 const CustomBeers = () => {
   const { isOpen, onOpenModal, onCloseModal } = useModal();
+  const dispatch = useDispatch();
 
   const customBeers = useSelector((state: RootState) => {
     return state.customBeers.customBeers;
   });
+
+  const removeCustomBeerFromStore = (beer: BaseBeerT) => {
+    dispatch(removeCustomBeer(beer));
+  };
 
   return (
     <Container className='d-flex flex-column'>
@@ -30,7 +36,7 @@ const CustomBeers = () => {
         <Container>
           <Row>
             {customBeers?.map((beer: BaseBeerT) => (
-              <BeerItemCard beer={beer} key={beer.name} />
+              <BeerItemCard beer={beer} key={beer.name} onDelete={removeCustomBeerFromStore} />
             ))}
           </Row>
         </Container>

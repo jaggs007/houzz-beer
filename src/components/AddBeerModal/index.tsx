@@ -49,9 +49,9 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
       onCloseModal();
     }
   };
+
   const addCustomBeerToStore = () => {
-    const { name, genre, description } = beer;
-    dispatch(addCustomBeer({ name, genre, description }));
+    dispatch(addCustomBeer(beer));
   };
 
   const resetForm = () => {

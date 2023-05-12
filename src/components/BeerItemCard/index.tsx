@@ -1,17 +1,21 @@
-import { Card, Col, Image, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import { Button, Card, Col, Image, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { useModal } from "hooks";
 import BeerDetailModal from "../BeerDetailModal";
 import { BeerResponseT, BaseBeerT, RenderTooltipProps } from "types";
 import DefaultImage from "static/houzz-beer.png";
 import { getSubString } from "utils";
+import DeleteModal from "common/DeleteModal";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 interface BeerItemCardI {
   beer: BeerResponseT | BaseBeerT;
+  onDelete?: (beer: BaseBeerT) => void;
 }
-export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer }) => {
+export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer, onDelete }) => {
   // @ts-ignore
   const { image_url: imageUrl, description, name, tagline, genre } = beer;
   const { isOpen, onCloseModal, onOpenModal } = useModal();
+  const { isOpen: showDelete, onOpenModal: onDeleteOpen, onCloseModal: onCloseDelete } = useModal();
 
   const renderTooltip = (props: RenderTooltipProps) => (
     <Tooltip id='button-tooltip' {...props}>
@@ -25,6 +29,11 @@ export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer }) => {
     sm: 12,
   };
 
+  const handleDeleteClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    onDeleteOpen();
+  };
+
   return (
     <Col sm={12} md={12} xs={12} lg={6}>
       <BeerDetailModal
@@ -32,6 +41,11 @@ export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer }) => {
         onCloseModal={onCloseModal}
         beer={beer}
         onClick={onOpenModal}
+      />
+      <DeleteModal
+        isOpen={showDelete}
+        onCloseModal={onCloseDelete}
+        onDelete={() => onDelete && onDelete(beer)}
       />
 
       <Card body className='hb-BeerItemCard mb-3' role='button' onClick={onOpenModal}>
@@ -58,6 +72,13 @@ export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer }) => {
               </Col>
             </Row>
           </Col>
+          {onDelete && (
+            <Col>
+              <Button variant='danger' onClick={handleDeleteClick}>
+                Delete <RiDeleteBin6Line />
+              </Button>
+            </Col>
+          )}
         </Row>
       </Card>
     </Col>

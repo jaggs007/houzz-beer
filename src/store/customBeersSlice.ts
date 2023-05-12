@@ -22,9 +22,16 @@ export const customBeersSlice = createSlice({
         state.customBeers.push(customBeer);
       }
     },
+    removeCustomBeer: (state, action: PayloadAction<BaseBeerT>) => {
+      const beerToDelete = action.payload;
+      const filteredBeers = state.customBeers.filter(
+        (beer: BaseBeerT) => beer.name !== beerToDelete.name,
+      );
+      state.customBeers = filteredBeers;
+    },
   },
 });
 
-export const { addCustomBeer } = customBeersSlice.actions;
+export const { addCustomBeer, removeCustomBeer } = customBeersSlice.actions;
 
 export default customBeersSlice.reducer;
