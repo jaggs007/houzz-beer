@@ -2,7 +2,6 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useModal } from "hooks";
 import AddBeerModal from "components/AddBeerModal";
-import "./index.scss";
 
 const Header = (): JSX.Element => {
   const location = useLocation();

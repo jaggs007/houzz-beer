@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form, Image } from 'react-bootstrap';
-import DefaultImage from 'static/houzz-beer.png';
-import { BeerErrorT, CustomBeerT } from 'types';
-import { useDispatch } from 'react-redux';
-import { addCustomBeer } from 'store/customBeersSlice';
+import React, { useState } from "react";
+import { Modal, Button, Form, Image } from "react-bootstrap";
+import DefaultImage from "static/houzz-beer.png";
+import { BaseBeerT } from "types";
+import { useDispatch } from "react-redux";
+import { addCustomBeer } from "store/customBeersSlice";
+import BeerFormItem from "components/AddBeerModal/BeerFormItem";
 
 interface AddBeerModalI {
   isOpen: boolean;
   onCloseModal: () => void;
 }
+
 const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
-  const [beer, setBeer] = useState<CustomBeerT>({
-    name: '',
-    genre: '',
-    description: '',
+  const [beer, setBeer] = useState<BaseBeerT>({
+    name: "",
+    genre: "",
+    description: "",
   });
 
-  const [errors, setErrors] = useState<BeerErrorT>({
-    name: '',
-    genre: '',
-    description: '',
+  const [errors, setErrors] = useState<BaseBeerT>({
+    name: "",
+    genre: "",
+    description: "",
   });
 
   const dispatch = useDispatch();
@@ -31,17 +33,17 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
     const { name, genre, description } = beer;
 
     if (!name) {
-      newErrors.name = 'Beer name is required';
+      newErrors.name = "Beer name is required";
       formIsValid = false;
     }
 
     if (!genre) {
-      newErrors.genre = 'Genre is required';
+      newErrors.genre = "Genre is required";
       formIsValid = false;
     }
 
     if (!description) {
-      newErrors.description = 'Description is required';
+      newErrors.description = "Description is required";
       formIsValid = false;
     }
 
@@ -56,9 +58,9 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
         }),
       );
       setBeer({
-        name: '',
-        genre: '',
-        description: '',
+        name: "",
+        genre: "",
+        description: "",
       });
       onCloseModal();
     }
@@ -74,8 +76,8 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
           <Image
             className='border border-1 mb-3 p-1'
             style={{
-              width: '90px',
-              height: '120px',
+              width: "90px",
+              height: "120px",
             }}
             src={DefaultImage}
           />
@@ -84,7 +86,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
             label='Name'
             value={beer.name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setBeer((prevValue: CustomBeerT) => {
+              setBeer((prevValue: BaseBeerT) => {
                 return {
                   ...prevValue,
                   name: e.target.value,
@@ -97,9 +99,9 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
 
           <BeerFormItem
             label='Genre'
-            value={beer.genre}
+            value={beer?.genre}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setBeer((prevValue: CustomBeerT) => {
+              setBeer((prevValue: BaseBeerT) => {
                 return {
                   ...prevValue,
                   genre: e.target.value,
@@ -114,7 +116,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
             label='Description'
             value={beer.description}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setBeer((prevValue: CustomBeerT) => {
+              setBeer((prevValue: BaseBeerT) => {
                 return {
                   ...prevValue,
                   description: e.target.value,
@@ -139,32 +141,3 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
 };
 
 export default AddBeerModal;
-
-interface BeerFormItemI {
-  label: string;
-  placeholder: string;
-  value: string;
-  fieldErrors: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-const BeerFormItem: React.FC<BeerFormItemI> = ({
-  label,
-  placeholder,
-  onChange,
-  value,
-  fieldErrors,
-}) => {
-  return (
-    <Form.Group className='mb-3' controlId='genre'>
-      <Form.Label>{label}</Form.Label>
-      <Form.Control
-        type='text'
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        required
-      />
-      {fieldErrors && <Form.Text className='text-danger'>{fieldErrors}</Form.Text>}
-    </Form.Group>
-  );
-};

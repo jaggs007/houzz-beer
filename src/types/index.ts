@@ -1,18 +1,6 @@
 import { TooltipProps } from "react-bootstrap";
 
-export type BeerT = {
-  name: string;
-  genre: string;
-  description: string;
-};
-
-export type BeerErrorT = {
-  name: string;
-  description: string;
-  genre: string;
-};
-
-export type CustomBeerT = {
+export type BaseBeerT = {
   name: string;
   genre: string;
   description: string;
@@ -36,12 +24,10 @@ type Ingredients = {
   yeast: string;
 };
 
-export type BeerResponseT = {
+export interface BeerResponseT extends BaseBeerT {
   id: string;
-  name: string;
   tagline: string;
   first_brewed: string;
-  description: string;
   image_url: string;
   abv: number;
   ibu: number;
@@ -53,7 +39,7 @@ export type BeerResponseT = {
   brewers_tips: string;
   target_og: number;
   ingredients: Ingredients;
-};
+}
 
 export interface RenderTooltipProps extends TooltipProps {
   tagline?: string;

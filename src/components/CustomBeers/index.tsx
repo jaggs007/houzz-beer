@@ -2,7 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import CustomBeerModal from "components/AddBeerModal";
 import { useModal } from "hooks";
 import { useSelector } from "react-redux";
-import { CustomBeerT } from "types";
+import { BaseBeerT } from "types";
 import { BeerItemCard } from "components/BeerItemCard";
 import { RootState } from "store";
 
@@ -21,7 +21,7 @@ const CustomBeers = () => {
       ) : (
         <Container>
           <Row>
-            {customBeers.map((beer: CustomBeerT) => (
+            {customBeers.map((beer: BaseBeerT) => (
               <BeerItemCard beer={beer} key={beer.name} />
             ))}
           </Row>

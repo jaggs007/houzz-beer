@@ -1,13 +1,12 @@
 import { Card, Col, Image, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
-import "./index.scss";
 import { useModal } from "hooks";
 import BeerDetailModal from "../BeerDetailModal";
-import { BeerResponseT, CustomBeerT, RenderTooltipProps } from "types";
+import { BeerResponseT, BaseBeerT, RenderTooltipProps } from "types";
 import DefaultImage from "static/houzz-beer.png";
 import { getSubString } from "utils";
 
 interface BeerItemCardI {
-  beer: BeerResponseT | CustomBeerT;
+  beer: BeerResponseT | BaseBeerT;
 }
 export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer }) => {
   // @ts-ignore

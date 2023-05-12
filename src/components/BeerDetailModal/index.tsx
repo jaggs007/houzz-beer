@@ -1,10 +1,10 @@
 import React from "react";
 import { Modal, Button, Image, Row, OverlayTrigger, Col, Tooltip } from "react-bootstrap";
-import { BeerResponseT, CustomBeerT, RenderTooltipProps } from "types";
+import { BeerResponseT, BaseBeerT, RenderTooltipProps } from "types";
 import DefaultImage from "static/houzz-beer.png";
 
 interface BeerDetailModalI {
-  beer: BeerResponseT | CustomBeerT;
+  beer: BeerResponseT | BaseBeerT;
   isOpen: boolean;
   onCloseModal: () => void;
   onClick: () => void;

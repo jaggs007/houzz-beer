@@ -1,14 +1,16 @@
 .hb-BeerItemCard {
-  min-height: 250px !important;
-}
-.hb-BeerItemCard:hover {
-  background: #aad3f2;
+	min-height: 250px !important;
 }
 
+.hb-BeerItemCard:hover {
+	background: $blue-secondary;
+}
+  
 .hb-BeerItemCard-image {
   max-height: 200px;
 }
-
+  
 .hb-BeerItemCard-tagline {
-  color: #ff8c00;
+  color: $orange-primary;
 }
+  
