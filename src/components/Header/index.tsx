@@ -2,6 +2,7 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useModal } from "hooks";
 import AddBeerModal from "components/AddBeerModal";
+import { RenderIfTrue } from "common/RenderIfTrue";
 
 const Header = (): JSX.Element => {
   const location = useLocation();
@@ -28,7 +29,7 @@ const Header = (): JSX.Element => {
             </Nav>
           </Navbar.Collapse>
         </Container>
-        {isCustomPage && (
+        <RenderIfTrue condition={isCustomPage}>
           <Button
             onClick={onOpenModal}
             className='justify-content-center mx-auto'
@@ -36,7 +37,7 @@ const Header = (): JSX.Element => {
           >
             Add a new beer
           </Button>
-        )}
+        </RenderIfTrue>
       </Navbar>
       <Outlet />
     </>

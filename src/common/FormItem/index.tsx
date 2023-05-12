@@ -1,3 +1,4 @@
+import { RenderIfTrue } from "common/RenderIfTrue";
 import React from "react";
 import { Form } from "react-bootstrap";
 
@@ -19,7 +20,9 @@ const FormItem: React.FC<FormItemI> = ({ label, placeholder, onChange, value, fi
         onChange={onChange}
         required
       />
-      {fieldErrors && <Form.Text className='text-danger'>{fieldErrors}</Form.Text>}
+      <RenderIfTrue condition={!!fieldErrors}>
+        <Form.Text className='text-danger'>{fieldErrors}</Form.Text>
+      </RenderIfTrue>
     </Form.Group>
   );
 };

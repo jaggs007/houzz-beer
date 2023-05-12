@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { BeerResponseT } from 'types';
-import { BEERS_API } from 'constant';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { BeerResponseT } from "types";
+import { BEERS_API } from "constant";
 
 export interface BeerState {
   data: BeerResponseT[];
@@ -15,7 +15,7 @@ const initialState: BeerState = {
 };
 
 export const fetchBeers = createAsyncThunk(
-  'beers/fetchBeers',
+  "beers/fetchBeers",
   async (queryParams: { page: number; itemsPerPage: number }) => {
     const { page, itemsPerPage } = queryParams;
     const response = await fetch(`${BEERS_API}?page=${page}&per_page=${itemsPerPage}`);
@@ -25,7 +25,7 @@ export const fetchBeers = createAsyncThunk(
 );
 
 export const beerSlice = createSlice({
-  name: 'beers',
+  name: "beers",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -39,7 +39,7 @@ export const beerSlice = createSlice({
       })
       .addCase(fetchBeers.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? 'Something went wrong';
+        state.error = action.error.message ?? "Something went wrong";
       });
   },
 });

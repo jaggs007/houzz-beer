@@ -9,6 +9,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { BeerResponseT } from "types";
 import { RootState } from "store";
 import EmptyContainer from "common/EmptyContainer";
+import { RenderIfTrue } from "common/RenderIfTrue";
 
 const Beers = () => {
   const [activePage, setActivePage] = useState<number>(1);
@@ -31,10 +32,15 @@ const Beers = () => {
     setActivePage(newActivePage);
   };
 
-  if (error)
+  if ((error || beersFetched.length === 0) && !loading)
     return (
       <EmptyContainer header='Oops!'>
-        <p>{error}</p>
+        <RenderIfTrue condition={!!error}>
+          <p>{error}</p>
+        </RenderIfTrue>
+        <RenderIfTrue condition={beersFetched.length === 0}>
+          <p>Nothing to display yet.</p>
+        </RenderIfTrue>
       </EmptyContainer>
     );
 
@@ -54,14 +60,14 @@ const Beers = () => {
           return <BeerItemCard beer={beer} key={id} />;
         })}
       </Row>
-
-      {beersFetched.length > 0 && loading ? (
+      <RenderIfTrue condition={beersFetched.length > 0 && loading}>
         <Spinner animation='border' role='status' as='span' aria-hidden='true'></Spinner>
-      ) : (
+      </RenderIfTrue>
+      <RenderIfTrue condition={!loading}>
         <Nav.Link onClick={onLoadMore} eventKey='load-more' className='link-primary fw-bold'>
           Load More <BsChevronDown size={20} color='blue' />
         </Nav.Link>
-      )}
+      </RenderIfTrue>
     </Container>
   );
 };

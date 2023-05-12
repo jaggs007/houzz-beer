@@ -6,6 +6,7 @@ import DefaultImage from "static/houzz-beer.png";
 import { getIngredients, getSubString } from "utils";
 import DeleteModal from "common/DeleteModal";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { RenderIfTrue } from "common/RenderIfTrue";
 
 interface BeerItemCardI {
   beer: BeerResponseT | BaseBeerT;
@@ -73,13 +74,13 @@ export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer, onDelete }) => {
               </Col>
             </Row>
           </Col>
-          {onDelete && (
+          <RenderIfTrue condition={!!onDelete}>
             <Col>
               <Button variant='danger' onClick={handleDeleteClick}>
                 Delete <RiDeleteBin6Line />
               </Button>
             </Col>
-          )}
+          </RenderIfTrue>
         </Row>
       </Card>
     </Col>
