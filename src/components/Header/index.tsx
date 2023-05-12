@@ -10,7 +10,7 @@ const Header = (): JSX.Element => {
   const isCustomPage = location.pathname.includes("custom-beers");
   return (
     <>
-      <Navbar variant='light' className='hb-Navbar mb-3' expand='lg'>
+      <Navbar variant='light' className='hb-Navbar my-3' expand='lg'>
         <Container>
           <AddBeerModal isOpen={isOpen} onCloseModal={onCloseModal} />
           <Navbar.Brand as='div' className='fw-bold text-info'>

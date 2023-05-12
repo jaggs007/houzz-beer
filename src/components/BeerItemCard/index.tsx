@@ -3,7 +3,7 @@ import { useModal } from "hooks";
 import BeerDetailModal from "../BeerDetailModal";
 import { BeerResponseT, BaseBeerT, RenderTooltipProps } from "types";
 import DefaultImage from "static/houzz-beer.png";
-import { getSubString } from "utils";
+import { getIngredients, getSubString } from "utils";
 import DeleteModal from "common/DeleteModal";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
@@ -13,13 +13,14 @@ interface BeerItemCardI {
 }
 export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer, onDelete }) => {
   // @ts-ignore
-  const { image_url: imageUrl, description, name, tagline, genre } = beer;
+  const { image_url: imageUrl, description, name, tagline, genre, ingredients } = beer;
+
   const { isOpen, onCloseModal, onOpenModal } = useModal();
   const { isOpen: showDelete, onOpenModal: onDeleteOpen, onCloseModal: onCloseDelete } = useModal();
 
   const renderTooltip = (props: RenderTooltipProps) => (
     <Tooltip id='button-tooltip' {...props}>
-      {tagline || genre}
+      {getIngredients(ingredients) || genre}
     </Tooltip>
   );
 
@@ -51,7 +52,7 @@ export const BeerItemCard: React.FC<BeerItemCardI> = ({ beer, onDelete }) => {
       <Card body className='hb-BeerItemCard mb-3' role='button' onClick={onOpenModal}>
         <Row>
           <Col xs={12} md={2} sm={12} lg={4}>
-            <OverlayTrigger placement='top' overlay={renderTooltip}>
+            <OverlayTrigger placement='right' overlay={renderTooltip}>
               <Image
                 className='hb-BeerItemCard-image border border-0'
                 thumbnail

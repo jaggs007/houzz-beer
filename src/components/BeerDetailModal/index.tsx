@@ -1,7 +1,8 @@
 import React from "react";
-import { Modal, Button, Image, Row, OverlayTrigger, Col, Tooltip } from "react-bootstrap";
-import { BeerResponseT, BaseBeerT, RenderTooltipProps } from "types";
+import { Modal, Button, Image, Row, Col } from "react-bootstrap";
+import { BeerResponseT, BaseBeerT } from "types";
 import DefaultImage from "static/houzz-beer.png";
+import { getIngredients } from "utils";
 
 interface BeerDetailModalI {
   beer: BeerResponseT | BaseBeerT;
@@ -12,13 +13,7 @@ interface BeerDetailModalI {
 
 const BeerDetailModal: React.FC<BeerDetailModalI> = ({ beer, isOpen, onCloseModal }) => {
   // @ts-ignore
-  const { name, description, image_url: imageUrl, tagline, genre } = beer;
-
-  const renderTooltip = (props: RenderTooltipProps) => (
-    <Tooltip id='button-tooltip' {...props}>
-      {tagline || genre}
-    </Tooltip>
-  );
+  const { name, description, image_url: imageUrl, tagline, ingredients } = beer;
 
   return (
     <Modal show={isOpen} onHide={onCloseModal}>
@@ -28,13 +23,11 @@ const BeerDetailModal: React.FC<BeerDetailModalI> = ({ beer, isOpen, onCloseModa
       <Modal.Body className='p-5'>
         <Row>
           <Col xs={12} className='text-center'>
-            <OverlayTrigger placement='top' overlay={renderTooltip}>
-              <Image
-                className='hb-BeerItemCard-image border border-0'
-                thumbnail
-                src={imageUrl || DefaultImage}
-              />
-            </OverlayTrigger>
+            <Image
+              className='hb-BeerItemCard-image border border-0'
+              thumbnail
+              src={imageUrl || DefaultImage}
+            />
           </Col>
           <Col xs={12}>
             <Row className='text-start'>
@@ -47,6 +40,11 @@ const BeerDetailModal: React.FC<BeerDetailModalI> = ({ beer, isOpen, onCloseModa
               <Col className='mt-2 fs-6' xs={12}>
                 {description}
               </Col>
+              {ingredients && (
+                <Col className='mt-2 fs-6' xs={12}>
+                  Ingredients: {getIngredients(ingredients)}
+                </Col>
+              )}
             </Row>
           </Col>
         </Row>

@@ -11,14 +11,14 @@ type IngredientAmount = {
   unit: string;
 };
 
-type Ingredient = {
+export type Ingredient = {
   name: string;
   amount: IngredientAmount;
   add?: string;
   attribute?: string;
 };
 
-type Ingredients = {
+export type Ingredients = {
   malt: Ingredient[];
   hops: Ingredient[];
   yeast: string;
