@@ -11,7 +11,7 @@ interface FormItemI {
 }
 const FormItem: React.FC<FormItemI> = ({ label, placeholder, onChange, value, fieldErrors }) => {
   return (
-    <Form.Group className='mb-3' controlId='genre'>
+    <Form.Group className='mb-3' controlId={label}>
       <Form.Label>{label}</Form.Label>
       <Form.Control
         type='text'
@@ -19,6 +19,7 @@ const FormItem: React.FC<FormItemI> = ({ label, placeholder, onChange, value, fi
         value={value}
         onChange={onChange}
         required
+        isInvalid={!!fieldErrors}
       />
       <RenderIfTrue condition={!!fieldErrors}>
         <Form.Text className='text-danger'>{fieldErrors}</Form.Text>

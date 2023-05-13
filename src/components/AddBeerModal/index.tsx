@@ -95,7 +95,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
           />
 
           <FormItem
-            label='Name'
+            label='Name*'
             value={beer.name}
             onChange={(e) => handleFieldChange(e, "name")}
             fieldErrors={errors.name}
@@ -103,7 +103,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
           />
 
           <FormItem
-            label='Genre'
+            label='Genre*'
             value={beer?.genre}
             onChange={(e) => handleFieldChange(e, "genre")}
             fieldErrors={errors.genre}
@@ -111,7 +111,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
           />
 
           <FormItem
-            label='Description'
+            label='Description*'
             value={beer.description}
             onChange={(e) => handleFieldChange(e, "description")}
             fieldErrors={errors.description}
