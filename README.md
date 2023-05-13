@@ -18,6 +18,7 @@ Displays list of beers.
 - Search for beers by name
 - Pagination for beers
 - Details of a single beer
+- Create/Delete custom beer
 
 ## Technologies
 

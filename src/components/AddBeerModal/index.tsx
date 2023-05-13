@@ -35,6 +35,8 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
       description: description ? "" : "Description is required",
     };
 
+    console.log({ newErrors });
+
     setErrors(newErrors);
     return !Object.values(newErrors).some(Boolean);
   };
@@ -104,7 +106,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
             label='Genre'
             value={beer?.genre}
             onChange={(e) => handleFieldChange(e, "genre")}
-            fieldErrors={errors.name}
+            fieldErrors={errors.genre}
             placeholder='Genre'
           />
 
@@ -112,7 +114,7 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
             label='Description'
             value={beer.description}
             onChange={(e) => handleFieldChange(e, "description")}
-            fieldErrors={errors.name}
+            fieldErrors={errors.description}
             placeholder='Description'
           />
         </Form>
