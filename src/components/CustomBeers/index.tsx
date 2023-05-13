@@ -1,6 +1,6 @@
 import { Container, Row } from "react-bootstrap";
 import CustomBeerModal from "components/AddBeerModal";
-import { useModal } from "hooks";
+import { useModal } from "hooks/useModal";
 import { useSelector, useDispatch } from "react-redux";
 import { BaseBeerT } from "types";
 import { BeerItemCard } from "components/BeerItemCard";

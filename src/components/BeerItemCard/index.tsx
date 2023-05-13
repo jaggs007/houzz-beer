@@ -1,5 +1,5 @@
 import { Button, Card, Col, Image, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
-import { useModal } from "hooks";
+import { useModal } from "hooks/useModal";
 import BeerDetailModal from "../BeerDetailModal";
 import { BeerResponseT, BaseBeerT, RenderTooltipProps } from "types";
 import DefaultImage from "static/houzz-beer.png";

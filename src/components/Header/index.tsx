@@ -1,6 +1,6 @@
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { useModal } from "hooks";
+import { useModal } from "hooks/useModal";
 import AddBeerModal from "components/AddBeerModal";
 import { RenderIfTrue } from "common/RenderIfTrue";
 
