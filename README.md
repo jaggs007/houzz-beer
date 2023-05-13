@@ -1,4 +1,4 @@
-# Houzz-ber
+# Houzz-beer
 
 Displays list of beers.
 
