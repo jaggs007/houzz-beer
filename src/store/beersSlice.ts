@@ -16,9 +16,15 @@ const initialState: BeerState = {
 
 export const fetchBeers = createAsyncThunk(
   "beers/fetchBeers",
-  async (queryParams: { page: number; itemsPerPage: number }) => {
-    const { page, itemsPerPage } = queryParams;
-    const response = await fetch(`${BEERS_API}?page=${page}&per_page=${itemsPerPage}`);
+  async (queryParams: { page: number; itemsPerPage: number; searchTerm?: string }) => {
+    const { page, itemsPerPage, searchTerm } = queryParams;
+    let url = `${BEERS_API}?page=${page}&per_page=${itemsPerPage}`;
+
+    if (searchTerm) {
+      url += `&beer_name=${encodeURIComponent(searchTerm)}`;
+    }
+
+    const response = await fetch(url);
     const data = await response.json();
     return data as BeerResponseT[];
   },
@@ -34,8 +40,15 @@ export const beerSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchBeers.fulfilled, (state, action) => {
+        const { searchTerm, page } = action.meta.arg;
+        const newData = action.payload;
+
         state.loading = false;
-        state.data = [...state.data, ...action.payload];
+        if (searchTerm && page === 1) {
+          state.data = newData;
+        } else {
+          state.data = page === 1 ? newData : [...state.data, ...newData];
+        }
       })
       .addCase(fetchBeers.rejected, (state, action) => {
         state.loading = false;

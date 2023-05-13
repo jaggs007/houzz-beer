@@ -1,6 +1,6 @@
 interface OwnProps {
   condition: boolean;
-  children: React.ReactNode | any;
+  children: any;
 }
 
 export const RenderIfTrue: React.FC<OwnProps> = ({ condition, children }) => {
