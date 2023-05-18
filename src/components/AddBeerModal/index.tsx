@@ -35,8 +35,6 @@ const AddBeerModal: React.FC<AddBeerModalI> = ({ isOpen, onCloseModal }) => {
       description: description ? "" : "Description is required",
     };
 
-    console.log({ newErrors });
-
     setErrors(newErrors);
     return !Object.values(newErrors).some(Boolean);
   };
